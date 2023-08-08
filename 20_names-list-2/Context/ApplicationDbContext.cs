@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NamesList.Models;
-using System; //было в образце, поэтому пока оставлю
 
 namespace NamesList.Context
 {
