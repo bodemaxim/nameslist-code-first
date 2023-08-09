@@ -35,16 +35,13 @@
           </button>
         </div>
       </form>
-      <p class="input-form__footnote">
-        Обновите страницу, чтобы увидеть новые имена в списке.
-      </p>
     </div>
   </div>
 </template>
 
 <script>
 import api from '@/api';
-import emitter from '@/store/emitter'; // Импортируйте экземпляр emitter
+import emitter from '@/store/emitter'; //служит для создания и отправки события 'updateNames', которое слушается в компоненте NamesList
 
 export default {
   data() {
@@ -60,11 +57,11 @@ export default {
           `Добавлен новый пользователь:\nИмя: ${this.firstName}\nФамилия: ${this.lastName}`
         );
 
-        // После обработки данных можно сбросить поля ввода
+        // сбрасываем поля ввода
         this.firstName = '';
         this.lastName = '';
 
-        // Эмитируйте событие для обновления списка имен
+        // эмитируем событие для обновления списка
         emitter.emit('updateNames');
       });
     },
@@ -119,13 +116,13 @@ export default {
 }
 
 .input-form__inputs {
-  display: flex; /* Используем Flexbox */
-  justify-content: space-between; /* Равномерное распределение элементов по ширине */
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
 .input-form__input--margin-right {
-  margin-right: 10px; /* Добавляем марджин справа для поля ввода "имя" */
+  margin-right: 10px;
 }
 
 .input-form__inputs-button {
@@ -142,10 +139,6 @@ export default {
 .input-form__inputs-button:hover {
   background-color: #000000;
   color: white;
-}
-
-.input-form__footnote {
-  font-style: italic;
 }
 
 /*Media Queries*/

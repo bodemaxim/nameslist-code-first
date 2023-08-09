@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore; // Добавим этот using
-using NamesList.Context; // Импортируем контекст базы данных
+using Microsoft.EntityFrameworkCore;
+using NamesList.Context;
 using NamesList.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks; // Добавим этот using
 
 namespace NamesList.Controllers
 {
@@ -12,24 +9,24 @@ namespace NamesList.Controllers
     [ApiController]
     public class NamesController : ControllerBase
     {
-        private readonly ApplicationDbContext _dbContext; // Изменяем поле для использования контекста
+        private readonly ApplicationDbContext _dbContext; 
 
-        public NamesController(ApplicationDbContext dbContext) // Внедряем контекст в конструктор
+        public NamesController(ApplicationDbContext dbContext) 
         {
             _dbContext = dbContext;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get() // Изменяем на асинхронный метод
+        public async Task<IActionResult> Get() 
         {
-            var names = await _dbContext.Names.ToListAsync(); // Извлекаем данные из базы данных асинхронно
+            var names = await _dbContext.Names.ToListAsync(); 
             return Ok(names);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id) // Изменяем на асинхронный метод
+        public async Task<IActionResult> Get(int id) 
         {
-            var name = await _dbContext.Names.FindAsync(id); // Извлекаем данные из базы данных асинхронно
+            var name = await _dbContext.Names.FindAsync(id); 
             if (name == null)
                 return NotFound();
 
@@ -37,39 +34,38 @@ namespace NamesList.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Name name) // Изменяем на асинхронный метод
+        public async Task<IActionResult> Post(Name name) 
         {
             _dbContext.Names.Add(name);
-            await _dbContext.SaveChangesAsync(); // Сохраняем изменения в базе данных асинхронно
+            await _dbContext.SaveChangesAsync(); 
 
             return CreatedAtAction(nameof(Get), new { id = name.Id }, name);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Name updatedName) // Изменяем на асинхронный метод
+        public async Task<IActionResult> Put(int id, Name updatedName) 
         {
-            var existingName = await _dbContext.Names.FindAsync(id); // Извлекаем данные из базы данных асинхронно
+            var existingName = await _dbContext.Names.FindAsync(id); 
             if (existingName == null)
                 return NotFound();
 
             existingName.FirstName = updatedName.FirstName;
             existingName.LastName = updatedName.LastName;
 
-            await _dbContext.SaveChangesAsync(); // Сохраняем изменения в базе данных асинхронно
+            await _dbContext.SaveChangesAsync();
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id) // Изменяем на асинхронный метод
+        public async Task<IActionResult> Delete(int id) 
         {
-            var name = await _dbContext.Names.FindAsync(id); // Извлекаем данные из базы данных асинхронно
+            var name = await _dbContext.Names.FindAsync(id); 
             if (name == null)
                 return NotFound();
 
             _dbContext.Names.Remove(name);
-            await _dbContext.SaveChangesAsync(); // Сохраняем изменения в базе данных асинхронно
-
+            await _dbContext.SaveChangesAsync(); 
             return NoContent();
         }
     }

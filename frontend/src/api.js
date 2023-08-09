@@ -21,7 +21,7 @@ export default {
   },
   userList() {
     return api
-      .get('/Names') // Проверьте путь к вашему эндпоинту
+      .get('/Names')
       .then((response) => response.data)
       .catch((error) => {
         console.error('Ошибка при получении списка пользователей:', error);
@@ -29,36 +29,3 @@ export default {
       });
   },
 };
-
-/*
-export default {
-  userCreate() {
-    fetch('http://localhost:5269/api/Names', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id: 0,
-        firstName: 'string',
-        lastName: 'string',
-      }),
-    });
-    // const formData = new FormData();
-    // formData.append('firstName', firstName);
-    // formData.append('lastName', lastName);
-    // formData.append('id', 0);
-
-    // fetch('http://localhost:5269/api/Names', {
-    //   method: 'POST',
-    //   body: formData,
-    // });
-  },
-  userList() {
-    return fetch('http://localhost:5269/api/Names').then((response) =>
-      response.json()
-    );
-  },
-};
-*/

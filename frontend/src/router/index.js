@@ -7,7 +7,7 @@ const routes = [
     path: '/',
     name: 'home',
     components: {
-      default: InputForm, // Компонент InputForm будет отображаться в основной точке монтирования
+      default: InputForm, // Компонент InputForm отображается в основной точке монтирования
       namesList: NamesList,
     },
   },

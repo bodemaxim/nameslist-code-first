@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import mitt from 'mitt'; // Импортируйте библиотеку mitt
+import mitt from 'mitt'; // Импортируем библиотеку mitt, чтобы следить за определенными событиями
 
-const emitter = mitt(); // Создайте экземпляр эмиттера
+const emitter = mitt(); // Создаем экземпляр эмиттера
 
 export default {
   created() {
