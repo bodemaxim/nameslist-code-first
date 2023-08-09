@@ -44,6 +44,7 @@
 
 <script>
 import api from '@/api';
+import emitter from '@/store/emitter'; // Импортируйте экземпляр emitter
 
 export default {
   data() {
@@ -63,8 +64,8 @@ export default {
         this.firstName = '';
         this.lastName = '';
 
-        // Устанавливаем флаг обновления списка имен
-        this.updateNames = true;
+        // Эмитируйте событие для обновления списка имен
+        emitter.emit('updateNames');
       });
     },
   },

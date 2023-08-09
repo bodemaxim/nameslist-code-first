@@ -12,23 +12,17 @@
 </template>
 
 <script>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 import api from '@/api';
+import emitter from '@/store/emitter';
 
 export default {
   setup() {
     const names = ref([]);
-    const updateNames = ref(false);
 
     onMounted(() => {
       fetchNames();
-    });
-
-    watch(updateNames, () => {
-      if (updateNames.value) {
-        fetchNames();
-        updateNames.value = false;
-      }
+      emitter.on('updateNames', fetchNames);
     });
 
     const fetchNames = () => {
@@ -39,7 +33,6 @@ export default {
 
     return {
       names,
-      updateNames,
     };
   },
 };
