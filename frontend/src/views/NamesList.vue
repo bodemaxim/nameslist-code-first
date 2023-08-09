@@ -1,3 +1,5 @@
+/**/
+
 <template>
   <div>
     <h2>Список имен</h2>
@@ -10,20 +12,18 @@
 </template>
 
 <script>
-import { ref, onMounted, watch } from 'vue'; // Импортируем ref, onMounted и watch
+import { ref, onMounted, watch } from 'vue';
 import api from '@/api';
 
 export default {
-  name: 'NamesList',
-  setup(props, context) {
-    const names = ref([]); // Создаем реактивную переменную для списка имен
-    const updateNames = ref(false); // Создаем реактивную переменную для флага обновления
+  setup() {
+    const names = ref([]);
+    const updateNames = ref(false);
 
     onMounted(() => {
-      fetchNames(); // Вызываем метод для получения списка имен при монтировании
+      fetchNames();
     });
 
-    // При изменении флага обновления, вызываем метод для обновления списка имен
     watch(updateNames, () => {
       if (updateNames.value) {
         fetchNames();
@@ -33,13 +33,13 @@ export default {
 
     const fetchNames = () => {
       api.userList().then((response) => {
-        names.value = response; // Обновляем список имен
+        names.value = response;
       });
     };
 
     return {
-      names, // Возвращаем реактивную переменную из setup
-      updateNames, // Возвращаем реактивную переменную из setup
+      names,
+      updateNames,
     };
   },
 };

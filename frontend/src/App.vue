@@ -7,24 +7,15 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'; // Импортируем ref и onMounted
+import mitt from 'mitt'; // Импортируйте библиотеку mitt
 
-import NamesList from '@/views/NamesList.vue';
+const emitter = mitt(); // Создайте экземпляр эмиттера
 
 export default {
-  components: {
-    NamesList,
-  },
-  setup() {
-    const updateNames = ref(false); // Создаем реактивную переменную для обновления списка имен
-
-    onMounted(() => {
-      updateNames.value = false; // При монтировании компонента сбрасываем флаг обновления
+  created() {
+    emitter.on('updateNames', () => {
+      this.$refs.namesList.fetchNames();
     });
-
-    return {
-      updateNames, // Возвращаем реактивную переменную из setup
-    };
   },
 };
 </script>
